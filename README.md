@@ -355,6 +355,164 @@ El módulo de pagos registra historial de transacciones, estado de liquidación 
 
 ---
 
+### UI/UX — Diseño y Estilos
+
+#### Sistema de Dark Mode (`src/style.css`)
+
+Se implementó un sistema completo de dark mode basado en clase (`html.dark`) con más de 315 líneas de overrides CSS. Cubre tres ámbitos de scoping:
+
+| Ámbito CSS | Selector | Aplica a |
+|---|---|---|
+| Panel cliente | `.clp-root` | Todas las vistas del cliente |
+| Panel profesional | `.prp-root` | Todas las vistas del profesional |
+| Panel admin | `.adp-root` | Todas las vistas del admin |
+| Modales teleportados | `.fixed.inset-0` | Modales fuera del árbol de componentes (Teleport) |
+
+**Tokens de color dark mode:**
+
+| Token | Valor light | Valor dark |
+|---|---|---|
+| Fondo base | `#ffffff` / `#f0f4f8` | `#0f172a` |
+| Superficie de panel | `#ffffff` | `#1e293b` |
+| Superficie sutil | `bg-slate-50` | `rgba(255,255,255,0.06)` |
+| Texto principal | `#0f172a` | `#f1f5f9` |
+| Texto secundario | `slate-700` | `rgba(255,255,255,0.75)` |
+| Texto muted | `slate-500` | `rgba(255,255,255,0.50)` |
+| Borde suave | `slate-100` | `rgba(255,255,255,0.07)` |
+| Borde estándar | `slate-200` | `rgba(255,255,255,0.10)` |
+| Input background | blanco | `rgba(255,255,255,0.06)` |
+| Input placeholder | slate-400 | `rgba(255,255,255,0.30)` |
+
+**Colores pastel en dark mode** (badges, etiquetas de estado, fondos de íconos):
+
+| Color | bg-*-100 dark | bg-*-50 dark | text-*-700 dark |
+|---|---|---|---|
+| Emerald | `rgba(16,185,129,0.15)` | `rgba(16,185,129,0.08)` | `#34d399` |
+| Amber | `rgba(245,158,11,0.15)` | `rgba(245,158,11,0.08)` | `#fbbf24` |
+| Blue | `rgba(37,99,235,0.15)` | `rgba(37,99,235,0.08)` | `#60a5fa` |
+| Cyan | `rgba(6,182,212,0.15)` | — | `#22d3ee` |
+| Teal | `rgba(20,184,166,0.15)` | — | `#2dd4bf` |
+| Red | `rgba(239,68,68,0.15)` | `rgba(239,68,68,0.08)` | `#f87171` |
+| Purple | `rgba(147,51,234,0.15)` | — | `#c084fc` |
+
+**Sombras ajustadas para dark mode:**
+
+| Clase | Light | Dark |
+|---|---|---|
+| `shadow-sm` | estándar | `0 1px 8px rgba(0,0,0,0.35)` |
+| `shadow-md` | estándar | `0 4px 18px rgba(0,0,0,0.40)` |
+| `shadow-lg` | estándar | `0 8px 28px rgba(0,0,0,0.45)` |
+| `hover:shadow-md` | estándar | `0 4px 18px rgba(0,0,0,0.45)` |
+| `hover:shadow-lg` | estándar | `0 8px 28px rgba(0,0,0,0.50)` |
+
+**Fix crítico — SVG charts en dark (AdminPanel):**
+- Grid lines `stroke="#f1f5f9"` → `rgba(255,255,255,0.08)`
+- Etiquetas de eje `fill="#94a3b8"` → `rgba(255,255,255,0.40)`
+- Puntos de data `stroke="white"` → `#1e293b` (mismo color que superficie, evita halo blanco)
+
+**Fix — modales teleportados:**
+- `text-slate-800` en modal dark producía texto invisible (negro sobre fondo `#1e293b`) → mapeado a `rgba(255,255,255,0.85)`
+- Área de mensajes del ChatModal `.bg-[#f0f2f5]` → `#0f172a`
+- Todos los colores pastel replicados también en selector `.fixed.inset-0`
+
+---
+
+#### Landing Page (`src/views/LandingPage.vue`)
+
+**Fondo animado:**
+- Dark mode: 3 blobs de gradiente animados (`hero-blob-1/2/3`) + overlay de grid de puntos (`hero-grid`)
+- Light mode: 2 blobs pastel suaves (`light-blob-1/2`)
+
+**Navbar:**
+- Posición `fixed` con transparencia al inicio
+- Al hacer scroll > 60px: `backdrop-blur-xl` + borde + sombra (`bg-[#0d1b2e]/90` en dark, `bg-white/95` en light)
+- Botón de tema (dark/light toggle) integrado en la barra
+- CTA "Empezar gratis" con gradiente de acento
+- Menú móvil colapsable con animación `Transition` (`opacity` + `translateY`)
+
+**Paleta Landing:**
+- Fondo dark: `#0d1b2e`
+- Gradiente de botón primario: `lp-btn-gradient` (cyan → purple)
+- Texto dark: `white/65` → `white` en hover
+- Texto light: `slate-500` → `slate-900` en hover
+
+---
+
+#### Login / Registro (`src/views/Login.vue`)
+
+**Fondo:** 3 orbs de gradiente animados (`orb-1/2/3`) + overlay de grid (`grid-overlay`) — siempre dark
+
+**Tarjeta (glassmorphism):**
+- `.login-card` con `backdrop-blur`, fondo semi-transparente, borde `white/10`
+- Barra de acento superior `.card-bar` con gradiente `#7ec8f5 → #c084f5`
+
+**Tabs login/registro:**
+- Tab activo: `bg-gradient-to-r from-[#7ec8f5] to-[#c084f5]` con `shadow-lg`
+- Tab inactivo: `text-white/50` con hover a `text-white`
+
+**Selector de rol (registro):**
+- Tarjetas clickeables con estado seleccionado: borde `#7ec8f5`, fondo `rgba(126,200,245,0.12)`, glow `shadow-[0_0_18px_rgba(126,200,245,0.2)]`
+- Check visual con gradiente cyan → purple
+- Avatar de rol con gradiente `from-[#7ec8f5] to-[#c084f5]`
+
+**Inputs:**
+- `.input-wrap` con ícono SVG a la izquierda
+- `.input-field` con fondo translúcido, borde `white/15`, focus ring de acento
+- Placeholder `white/35`
+
+---
+
+#### Paleta General del Sistema
+
+| Elemento | Color / Valor |
+|---|---|
+| Primario (botones, links) | `#2563ff` / `blue-600` |
+| Gradiente de acento | `#7ec8f5` (cyan) → `#c084f5` (purple) → `#f472b6` (pink) |
+| Fondo dark base | `#0f172a` (slate-900) |
+| Superficie dark | `#1e293b` (slate-800) |
+| Fondo dark landing | `#0d1b2e` |
+| Tipografía | `Inter`, `Segoe UI`, `system-ui` |
+| Border radius tarjetas | `rounded-2xl` (16px) |
+| Border radius inputs | `rounded-[14px]` |
+| Border radius botones | `rounded-xl` (12px) |
+
+---
+
+#### Responsive Design
+
+| Breakpoint | Ancho | Comportamiento clave |
+|---|---|---|
+| Default (mobile) | < 640px | Sidebar oculto, layout una columna, menú hamburguesa |
+| `sm` | ≥ 640px | CTAs de navbar visibles, mejoras menores de espaciado |
+| `md` | ≥ 768px | Sidebar siempre visible, nav desktop, layout de dos columnas |
+| `lg` | ≥ 1024px | Grids de 3 columnas, dashboard expandido |
+| `xl` | ≥ 1280px | Max-width contenedor `max-w-7xl`, layouts amplios |
+
+---
+
+#### Componentes UI clave
+
+**`AppSidebar.vue`** — Sidebar de navegación
+- Props: `items`, `activePage`, `dark`, `showClose`
+- Emite: `navigate`, `logout`, `closeMobile`
+- Botón de cerrar en móvil, items con ícono + label
+
+**`StatCard.vue`** — Tarjeta KPI
+- Props: `label`, `value`, `icon`, `iconSvg`, `iconBg`, `iconColor`, `trend`, `sub`, `link`, `dark`
+- Soporte de tendencias con flecha y color (verde subida, rojo bajada)
+
+**`ServiceCard.vue`** — Tarjeta de servicio
+- Props: `name`, `category`, `price`, `rating`, `emoji`, `gradient`
+- Diseño de card con gradiente de fondo configurable
+
+**`ChatModal.vue`** — Chat en tiempo real
+- Burbujas de mensaje diferenciadas (emisor vs receptor)
+- Avatares con color único por usuario (hash del nombre)
+- Timestamps formateados en español (`es-CO`)
+- Indicador de mensajes no leídos con badge numérico
+
+---
+
 ## Endpoints API consumidos
 
 | Método | Endpoint | Módulo | Descripción |
