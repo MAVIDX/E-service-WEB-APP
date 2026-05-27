@@ -1,0 +1,315 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* { box-sizing: border-box; }
+body { margin: 0; font-family: 'Inter', 'Segoe UI', system-ui, sans-serif; }
+input, button, select, textarea { font-family: inherit; }
+
+/* ═══════════════════════════════════════════════════════════════
+   DARK MODE — Panel overrides
+   Activado cuando App.vue añade class="dark" al <html>
+   Ámbito: .clp-root (Cliente), .prp-root (Profesional), .adp-root (Admin)
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── Root backgrounds ── */
+html.dark .clp-root { background-color: #0f172a; }
+html.dark .prp-root { background-color: #0f172a; }
+html.dark .adp-root { background-color: #0f172a; }
+
+/* ── Superficies blancas → superficie oscura ── */
+html.dark .clp-root .bg-white,
+html.dark .prp-root .bg-white,
+html.dark .adp-root .bg-white { background-color: #1e293b !important; }
+
+/* ── Slate-50 (fondos de botones, inputs, secciones) ── */
+html.dark .clp-root .bg-slate-50,
+html.dark .prp-root .bg-slate-50,
+html.dark .adp-root .bg-slate-50 { background-color: rgba(255,255,255,0.06) !important; }
+
+/* ── Arbitrary bg-[#f0f4f8] → fondo del panel ── */
+html.dark .clp-root .bg-\[\#f0f4f8\],
+html.dark .prp-root .bg-\[\#f0f4f8\] { background-color: #0f172a !important; }
+
+/* ── Arbitrary bg-[#f8fafc] → input/search bar ── */
+html.dark .clp-root .bg-\[\#f8fafc\],
+html.dark .prp-root .bg-\[\#f8fafc\],
+html.dark .adp-root .bg-\[\#f8fafc\] { background-color: rgba(255,255,255,0.05) !important; }
+
+/* ── Texto principal ── */
+html.dark .clp-root .text-\[\#0f172a\],
+html.dark .prp-root .text-\[\#0f172a\],
+html.dark .adp-root .text-\[\#0f172a\] { color: #f1f5f9 !important; }
+
+html.dark .clp-root .text-slate-900,
+html.dark .prp-root .text-slate-900,
+html.dark .adp-root .text-slate-900 { color: #f1f5f9 !important; }
+
+html.dark .clp-root .text-slate-800,
+html.dark .prp-root .text-slate-800,
+html.dark .adp-root .text-slate-800 { color: rgba(255,255,255,0.85) !important; }
+
+html.dark .clp-root .text-slate-700,
+html.dark .prp-root .text-slate-700,
+html.dark .adp-root .text-slate-700 { color: rgba(255,255,255,0.75) !important; }
+
+html.dark .clp-root .text-slate-600,
+html.dark .prp-root .text-slate-600,
+html.dark .adp-root .text-slate-600 { color: rgba(255,255,255,0.65) !important; }
+
+html.dark .clp-root .text-slate-500,
+html.dark .prp-root .text-slate-500,
+html.dark .adp-root .text-slate-500 { color: rgba(255,255,255,0.5) !important; }
+
+html.dark .clp-root .text-slate-400,
+html.dark .prp-root .text-slate-400,
+html.dark .adp-root .text-slate-400 { color: rgba(255,255,255,0.4) !important; }
+
+/* ── Bordes ── */
+html.dark .clp-root .border-slate-100,
+html.dark .prp-root .border-slate-100,
+html.dark .adp-root .border-slate-100 { border-color: rgba(255,255,255,0.07) !important; }
+
+html.dark .clp-root .border-slate-200,
+html.dark .prp-root .border-slate-200,
+html.dark .adp-root .border-slate-200 { border-color: rgba(255,255,255,0.1) !important; }
+
+html.dark .clp-root .border-slate-300,
+html.dark .prp-root .border-slate-300,
+html.dark .adp-root .border-slate-300 { border-color: rgba(255,255,255,0.15) !important; }
+
+/* ── Hover states ── */
+html.dark .clp-root .hover\:bg-slate-50:hover,
+html.dark .prp-root .hover\:bg-slate-50:hover,
+html.dark .adp-root .hover\:bg-slate-50:hover { background-color: rgba(255,255,255,0.07) !important; }
+
+html.dark .clp-root .hover\:bg-slate-100:hover,
+html.dark .prp-root .hover\:bg-slate-100:hover,
+html.dark .adp-root .hover\:bg-slate-100:hover { background-color: rgba(255,255,255,0.1) !important; }
+
+/* ── Focus ring en search ── */
+html.dark .clp-root .focus-within\:border-blue-400:focus-within,
+html.dark .prp-root .focus-within\:border-blue-400:focus-within { border-color: rgba(126,200,245,0.5) !important; }
+
+/* ── Inputs / textareas / selects ── */
+html.dark .clp-root input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+html.dark .clp-root textarea,
+html.dark .clp-root select,
+html.dark .prp-root input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+html.dark .prp-root textarea,
+html.dark .prp-root select,
+html.dark .adp-root input:not([type="checkbox"]):not([type="radio"]):not([type="range"]),
+html.dark .adp-root textarea,
+html.dark .adp-root select {
+  background-color: rgba(255,255,255,0.06) !important;
+  color: rgba(255,255,255,0.85) !important;
+  border-color: rgba(255,255,255,0.12) !important;
+}
+
+html.dark .clp-root input::placeholder,
+html.dark .clp-root textarea::placeholder,
+html.dark .prp-root input::placeholder,
+html.dark .prp-root textarea::placeholder,
+html.dark .adp-root input::placeholder,
+html.dark .adp-root textarea::placeholder { color: rgba(255,255,255,0.3) !important; }
+
+/* ── Sombras suavizadas ── */
+html.dark .clp-root .shadow-sm,
+html.dark .prp-root .shadow-sm { box-shadow: 0 1px 8px rgba(0,0,0,0.35) !important; }
+
+html.dark .clp-root .shadow-md,
+html.dark .prp-root .shadow-md { box-shadow: 0 4px 18px rgba(0,0,0,0.4) !important; }
+
+html.dark .clp-root .shadow-lg,
+html.dark .prp-root .shadow-lg { box-shadow: 0 8px 28px rgba(0,0,0,0.45) !important; }
+
+/* ── Divide lines ── */
+html.dark .clp-root .divide-slate-100 > :not([hidden]) ~ :not([hidden]),
+html.dark .prp-root .divide-slate-100 > :not([hidden]) ~ :not([hidden]) {
+  border-color: rgba(255,255,255,0.07);
+}
+
+/* ── hover:shadow (card lift effect) ── */
+html.dark .clp-root .hover\:shadow-md:hover,
+html.dark .prp-root .hover\:shadow-md:hover { box-shadow: 0 4px 18px rgba(0,0,0,0.45) !important; }
+
+html.dark .clp-root .hover\:shadow-lg:hover,
+html.dark .prp-root .hover\:shadow-lg:hover { box-shadow: 0 8px 28px rgba(0,0,0,0.5) !important; }
+
+/* ── SVG chart overrides (Admin dashboard) ── */
+/* Grid lines que usan color claro en light mode */
+html.dark .adp-root svg line[stroke="#f1f5f9"]  { stroke: rgba(255,255,255,0.08) !important; }
+html.dark .adp-root svg line[stroke="#e2e8f0"]  { stroke: rgba(255,255,255,0.07) !important; }
+/* Etiquetas de eje */
+html.dark .adp-root svg text[fill="#94a3b8"]    { fill: rgba(255,255,255,0.4) !important; }
+html.dark .adp-root svg text[fill="#64748b"]    { fill: rgba(255,255,255,0.5) !important; }
+/* Borde blanco de los puntos de data */
+html.dark .adp-root svg circle[stroke="white"]  { stroke: #1e293b !important; }
+
+/* ── Admin top-bar y page titles en dark ── */
+html.dark .adp-root .border-slate-100 { border-color: rgba(255,255,255,0.07) !important; }
+
+/* ══════════════════════════════════════════════════════
+   MODALES TELEPORTADOS (Teleport to="body")
+   No son hijos de .clp-root/.prp-root, se apuntan globalmente
+   ══════════════════════════════════════════════════════ */
+html.dark .fixed.inset-0 .bg-white { background-color: #1e293b !important; }
+html.dark .fixed.inset-0 .bg-slate-50 { background-color: rgba(255,255,255,0.05) !important; }
+html.dark .fixed.inset-0 .border-slate-100 { border-color: rgba(255,255,255,0.07) !important; }
+html.dark .fixed.inset-0 .border-slate-200 { border-color: rgba(255,255,255,0.1) !important; }
+html.dark .fixed.inset-0 .text-\[\#0f172a\] { color: #f1f5f9 !important; }
+html.dark .fixed.inset-0 .text-slate-900 { color: #f1f5f9 !important; }
+html.dark .fixed.inset-0 .text-slate-700 { color: rgba(255,255,255,0.75) !important; }
+html.dark .fixed.inset-0 .text-slate-500 { color: rgba(255,255,255,0.5) !important; }
+html.dark .fixed.inset-0 .text-slate-400 { color: rgba(255,255,255,0.4) !important; }
+html.dark .fixed.inset-0 input:not([type="checkbox"]):not([type="radio"]),
+html.dark .fixed.inset-0 textarea,
+html.dark .fixed.inset-0 select {
+  background-color: rgba(255,255,255,0.07) !important;
+  color: rgba(255,255,255,0.85) !important;
+  border-color: rgba(255,255,255,0.12) !important;
+}
+html.dark .fixed.inset-0 input::placeholder,
+html.dark .fixed.inset-0 textarea::placeholder { color: rgba(255,255,255,0.3) !important; }
+
+/* ══════════════════════════════════════════════════════
+   FIXES: bg-slate-100 + colores pastel + modales
+   ══════════════════════════════════════════════════════ */
+
+/* ── bg-slate-100 (badges, botones de acción, contadores) ── */
+html.dark .clp-root .bg-slate-100,
+html.dark .prp-root .bg-slate-100,
+html.dark .adp-root .bg-slate-100 { background-color: rgba(255,255,255,0.1) !important; }
+
+html.dark .clp-root .hover\:bg-slate-200:hover,
+html.dark .prp-root .hover\:bg-slate-200:hover,
+html.dark .adp-root .hover\:bg-slate-200:hover { background-color: rgba(255,255,255,0.15) !important; }
+
+html.dark .clp-root .bg-slate-200,
+html.dark .prp-root .bg-slate-200,
+html.dark .adp-root .bg-slate-200 { background-color: rgba(255,255,255,0.13) !important; }
+
+/* ── Pastel emerald ── */
+html.dark .clp-root .bg-emerald-100,
+html.dark .prp-root .bg-emerald-100,
+html.dark .adp-root .bg-emerald-100 { background-color: rgba(16,185,129,0.15) !important; }
+
+html.dark .clp-root .bg-emerald-50,
+html.dark .prp-root .bg-emerald-50,
+html.dark .adp-root .bg-emerald-50  { background-color: rgba(16,185,129,0.08) !important; }
+
+html.dark .clp-root .text-emerald-700,
+html.dark .prp-root .text-emerald-700,
+html.dark .adp-root .text-emerald-700 { color: #34d399 !important; }
+
+html.dark .clp-root .text-emerald-600,
+html.dark .prp-root .text-emerald-600,
+html.dark .adp-root .text-emerald-600 { color: #4ade80 !important; }
+
+/* ── Pastel amber ── */
+html.dark .clp-root .bg-amber-100,
+html.dark .prp-root .bg-amber-100,
+html.dark .adp-root .bg-amber-100 { background-color: rgba(245,158,11,0.15) !important; }
+
+html.dark .clp-root .bg-amber-50,
+html.dark .prp-root .bg-amber-50,
+html.dark .adp-root .bg-amber-50  { background-color: rgba(245,158,11,0.08) !important; }
+
+html.dark .clp-root .text-amber-700,
+html.dark .prp-root .text-amber-700,
+html.dark .adp-root .text-amber-700 { color: #fbbf24 !important; }
+
+html.dark .clp-root .text-amber-600,
+html.dark .prp-root .text-amber-600,
+html.dark .adp-root .text-amber-600 { color: #fcd34d !important; }
+
+/* ── Pastel blue ── */
+html.dark .clp-root .bg-blue-100,
+html.dark .prp-root .bg-blue-100,
+html.dark .adp-root .bg-blue-100 { background-color: rgba(37,99,235,0.15) !important; }
+
+html.dark .clp-root .bg-blue-50,
+html.dark .prp-root .bg-blue-50,
+html.dark .adp-root .bg-blue-50  { background-color: rgba(37,99,235,0.08) !important; }
+
+html.dark .clp-root .text-blue-700,
+html.dark .prp-root .text-blue-700,
+html.dark .adp-root .text-blue-700 { color: #60a5fa !important; }
+
+html.dark .clp-root .text-blue-600,
+html.dark .prp-root .text-blue-600,
+html.dark .adp-root .text-blue-600 { color: #60a5fa !important; }
+
+/* ── Pastel cyan / teal ── */
+html.dark .clp-root .bg-cyan-100,
+html.dark .prp-root .bg-cyan-100,
+html.dark .adp-root .bg-cyan-100 { background-color: rgba(6,182,212,0.15) !important; }
+
+html.dark .clp-root .text-cyan-700,
+html.dark .prp-root .text-cyan-700,
+html.dark .adp-root .text-cyan-700 { color: #22d3ee !important; }
+
+html.dark .clp-root .bg-teal-100,
+html.dark .prp-root .bg-teal-100,
+html.dark .adp-root .bg-teal-100 { background-color: rgba(20,184,166,0.15) !important; }
+
+html.dark .clp-root .text-teal-700,
+html.dark .prp-root .text-teal-700,
+html.dark .adp-root .text-teal-700 { color: #2dd4bf !important; }
+
+/* ── Pastel red ── */
+html.dark .clp-root .bg-red-100,
+html.dark .prp-root .bg-red-100,
+html.dark .adp-root .bg-red-100 { background-color: rgba(239,68,68,0.15) !important; }
+
+html.dark .clp-root .bg-red-50,
+html.dark .prp-root .bg-red-50,
+html.dark .adp-root .bg-red-50  { background-color: rgba(239,68,68,0.08) !important; }
+
+html.dark .adp-root .text-red-800 { color: #fca5a5 !important; }
+html.dark .adp-root .text-red-600 { color: #f87171 !important; }
+html.dark .clp-root .text-red-600,
+html.dark .prp-root .text-red-600 { color: #f87171 !important; }
+
+/* ── Pastel purple ── */
+html.dark .adp-root .bg-purple-100 { background-color: rgba(147,51,234,0.15) !important; }
+html.dark .adp-root .text-purple-700 { color: #c084fc !important; }
+
+/* ══════════════════════════════════════════════════════
+   MODALES TELEPORTADOS — fixes adicionales
+   ══════════════════════════════════════════════════════ */
+
+/* text-slate-800 faltaba (color = #1e293b = mismo que fondo → invisible) */
+html.dark .fixed.inset-0 .text-slate-800 { color: rgba(255,255,255,0.85) !important; }
+html.dark .fixed.inset-0 .text-slate-600 { color: rgba(255,255,255,0.65) !important; }
+html.dark .fixed.inset-0 .text-slate-300 { color: rgba(255,255,255,0.35) !important; }
+
+/* bg-slate-100 en modales teleportados */
+html.dark .fixed.inset-0 .bg-slate-100  { background-color: rgba(255,255,255,0.1) !important; }
+html.dark .fixed.inset-0 .bg-slate-200  { background-color: rgba(255,255,255,0.13) !important; }
+html.dark .fixed.inset-0 .hover\:bg-slate-200:hover { background-color: rgba(255,255,255,0.15) !important; }
+html.dark .fixed.inset-0 .hover\:bg-slate-50:hover  { background-color: rgba(255,255,255,0.07) !important; }
+
+/* bg-[#f0f2f5] — área de mensajes del ChatViewer */
+html.dark .fixed.inset-0 .bg-\[\#f0f2f5\] { background-color: #0f172a !important; }
+
+/* Colores pastel en modales teleportados */
+html.dark .fixed.inset-0 .bg-emerald-100 { background-color: rgba(16,185,129,0.15) !important; }
+html.dark .fixed.inset-0 .bg-emerald-50  { background-color: rgba(16,185,129,0.08) !important; }
+html.dark .fixed.inset-0 .text-emerald-700 { color: #34d399 !important; }
+
+html.dark .fixed.inset-0 .bg-amber-100  { background-color: rgba(245,158,11,0.15) !important; }
+html.dark .fixed.inset-0 .bg-amber-50   { background-color: rgba(245,158,11,0.08) !important; }
+html.dark .fixed.inset-0 .text-amber-700 { color: #fbbf24 !important; }
+
+html.dark .fixed.inset-0 .bg-blue-100   { background-color: rgba(37,99,235,0.15) !important; }
+html.dark .fixed.inset-0 .bg-blue-50    { background-color: rgba(37,99,235,0.08) !important; }
+html.dark .fixed.inset-0 .text-blue-700 { color: #60a5fa !important; }
+
+html.dark .fixed.inset-0 .bg-red-100    { background-color: rgba(239,68,68,0.15) !important; }
+html.dark .fixed.inset-0 .bg-red-50     { background-color: rgba(239,68,68,0.08) !important; }
+html.dark .fixed.inset-0 .text-red-600  { color: #f87171 !important; }
+html.dark .fixed.inset-0 .text-red-800  { color: #fca5a5 !important; }
+
+html.dark .fixed.inset-0 .bg-cyan-100   { background-color: rgba(6,182,212,0.15) !important; }
+html.dark .fixed.inset-0 .text-cyan-700 { color: #22d3ee !important; }
